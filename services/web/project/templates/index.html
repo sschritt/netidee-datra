@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}"/>
+    <style>
+        iframe { 
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body class="index-background">
+
+{% extends "layout.html" %}
+{% block content %}
+<!-- Your HTML content here -->
+<div class="left-container">
+    <!-- Header-->
+    <header class="py-5">
+        <div class="container px-lg-5">
+            <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
+                <div class="m-4 m-lg-5">
+                    <h1 class="display-5 fw-bold">Dein Tool für Datentransparenz und Datensicherheit</h1>
+                    <div style="margin-top: 65px"></div>
+
+                    <a class="btn btn-secondary" style="background-color: #0082ca; border-color: #0082ca;" height: 40px;
+                       padding-top: 14px;" href="/linkedin/login" role="button"><i class="fab fa-linkedin me-2"></i>Anmelden
+                    mit LinkedIn</a>
+
+                    <a class="btn btn-secondary"
+                       style="background-color: #dd4b39; border-color: #dd4b39; height: 40px; padding-top: 7px;"
+                       href="google/" role="button"><i class="fab fa-google me-2"></i>Anmelden mit Google</a>
+                    <script async defer crossorigin="anonymous"
+                            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=184791784339843&autoLogAppEvents=1"
+                            nonce="TkNf6DkU"></script>
+                    <div class="fb-login-button" size="large"
+                         data-scope="public_profile,email,user_age_range,user_gender,user_location,user_hometown,user_birthday,user_posts"
+                         data-width="250" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false"
+                         data-use-continue-as="false" onlogin="checkLoginState();"></div>
+                    <div id="status"></div>
+                </div>
+            </div>
+    </header>
+</div>
+<script src="{{ url_for('static', filename='js/facebook.js') }}"></script>
+<script src="{{ url_for('static', filename='js/linkedin.js') }}"></script>
+<script src="https://accounts.google.com/gsi/client" async></script>
+
+{% endblock %}
+
+</body>
+</html>
+
+
+
+

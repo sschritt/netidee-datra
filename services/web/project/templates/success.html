@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Awareness</title>
+</head>
+<body>
+{% extends "layout.html" %}
+{% block content %}
+<div class="awareness">
+
+    <h2 style="margin-top: 50px;" align="center">Erfahre mehr über dich selbst</h2>
+    <p style="margin-top: 20px;">
+        Thank you! We will mail results when done.
+    </p>
+</div>
+
+
+
+{% endblock %}
+</body>
+</html>

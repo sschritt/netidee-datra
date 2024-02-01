@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Awareness</title>
+</head>
+<body>
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="awareness info-box border-0">
+
+    <h2 style="color:black; font-family: 'Caveat', cursive; font-size: 4.5rem;">Wilkommen bei Datra!</h2>
+
+    <!-- Account and IP Information Boxes -->
+    <div class="info-container">
+        <div class="card border-0 h-100">
+            <div class="info-box border-0">
+                <p style="margin-top: 20px;">
+                    Hast du dich jemals gefragt, wie viel über dich im digitalen Raum auffindbar ist, basierend auf
+                    deinen Social
+                    Media Profilen?
+                </p>
+                <p>
+                    Bei Datra nehmen wir diese Neugier ernst und bieten dir die Möglichkeit, einen Einblick zu erhalten.
+                    Unsere
+                    Plattform untersucht deine Daten und deckt auf, inwiefern diese Rückschlüsse auf andere Profile und
+                    persönliche
+                    Informationen zulassen.
+                </p>
+
+                <p>
+                    Der Prozess ist einfach und sicher: Melde dich einfach mit dem Social Login an. Keine Bange, wir
+                    legen großen
+                    Wert auf deine Privatsphäre. Deine Daten werden sofort gelöscht, sobald du dich ausloggst. Und falls
+                    du es
+                    einmal vergisst, keine Sorge – wir entfernen alle deine Daten automatisch nach 24 Stunden <i class="fa-regular fa-face-grin-wink"></i>
+                </p>
+            </div>
+        </div>
+
+        <div class="card border-0 h-100">
+            <div class="info-box border-0">
+                <img src="{{ url_for('static', filename='images/drawkit-grape-pack-illustration-1.svg') }}"
+                     alt="My Happy SVG" style="width: 400px; height: auto; align: center;"/>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 style="margin-top: 50px; color: black;">Datensicherheit betrifft uns alle</h2>
+    <p style="margin-top: 20px;">
+        Datensicherheit ist ein wichtiges Thema in der heutigen digitalen Welt, da immer mehr persönliche Informationen
+        online geteilt werden.
+        Wir alle tragen eine gewisse Verantwortung dafür, wie wir unsere Daten schützen und sicherstellen, dass sie
+        nicht in die falschen Hände geraten.
+        <br>
+        Wenn wir uns nicht um unsere Datensicherheit kümmern, können unsere persönlichen Informationen für unerwünschte
+        Zwecke verwendet werden.
+        <br>
+        <br>
+    <h4>Welche Gefahren gibt es?</h4>
+    Zum Beispiel können unsere E-Mail-Adresse, unser Name und unser Geburtsdatum von Marketing-Unternehmen genutzt
+    werden, um uns mit unerwünschten E-Mails und Werbung zu bombardieren. Wir können auch Opfer von Identitätsdiebstahl
+    werden,
+    wenn Kriminelle unsere Daten stehlen und für ihre eigenen Zwecke nutzen. Deshalb sollten wir uns bewusst sein, wie
+    wir unsere Daten schützen können. Wir sollten starke Passwörter verwenden, regelmäßig unsere Software aktualisieren
+    und sichere Verbindungen verwenden, wenn wir im Internet surfen.
+    <br>
+    <br>
+    Wir sollten auch vorsichtig sein, welche persönlichen Informationen wir online teilen und nur vertrauenswürdige
+    Cloud-Dienste nutzen, die eine sichere Verschlüsselung unserer Daten anbieten.
+    Es ist auch wichtig, dass wir uns bewusst sind, dass Unternehmen auch eine Verantwortung für die Datensicherheit
+    tragen. Unternehmen sollten sicherstellen, dass sie die erforderlichen Schritte unternehmen, um die Daten ihrer
+    Kunden
+    zu schützen und sicherzustellen, dass diese nicht in die falschen Hände geraten.
+    <br>
+    <br>
+    Dienste wie die <a href="https://www.watchlist-internet.at/">Watchlist Internet</a> bieten unter anderem
+    Informationen zu unseriösen Webseiten und weitere interessante Tipps zum Thema Sicherheit im Internet.
+    Solltest du Opfer eines Betrugs geworden sein, melde dich sofort bei den entsprechenden Behörden.
+    <br>
+    <br>
+    <h4>Wie kann ich mich konkret schützen?</h4>
+    <ul>
+        <li>Achte darauf, ob dein Profil öffentlich zugänglich ist. So können andere Benutzer:innen auf deine
+            Profilinformationen zugreifen, einschließlich Fotos, Freunde, Posts und Kommentare
+        </li>
+        <li>Achte auch auf deine Posteinstellungen, sollten diese nämlich Öffentich sein, können auch Personen die nicht
+            deine Kontakte sind sie sehen
+        </li>
+        <li>Teile keine sensiblen Informationen, sowie deine Heimadresse, Telefonnummer oder auch die Adresse deiner
+            Schule
+        </li>
+        <li>Aktiviere die Zwei-Faktor-Authentifizierung, damit auch wirklich nur du Zugriff auf dein Konto hast</li>
+        <li>Verwende ein sicheres Passwort, welches stark und einzigartig ist und verwende wenn möglich auch einen
+            Password Manager
+        </li>
+        <li>Wenn möglich, deaktiviere die Standortverfolgung in den Einstellungen</li>
+        <li>Überprüfe die App-Berechtigungen auf deinem Gerät, z.B. ob ein Service Zugriff auf dein Mikrofon, deine
+            Kontakte oder weiteres hat
+        </li>
+        <li>Füge nur Leute in deine Kontaktliste hinzu die du auch wirklich kennst</li>
+        <li>Melde verdächtige Aktivitäten! Sollte dir eine Situation unangenehm sein oder hast du den Verdacht dein
+            Profil könnte gehackt worden sein, melde dies umgehend
+        </li>
+    </ul>
+
+
+</div>
+
+{% endblock %}
+</body>
+</html>

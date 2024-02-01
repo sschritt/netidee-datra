@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./services/web
+    command: python manage.py run -h 0.0.0.0
+    ports:
+      - 80:5000
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./services/web/instance/:/usr/src/app/instance
+  rabbitmq:
+    image: "rabbitmq:management"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  celery:
+    build:
+      context: ./services/web
+    environment:
+      CELERY_APP: main.celery
+    command: celery -A main.celery worker --loglevel=info
+    volumes:
+      - ./services/web/:/usr/src/app/
+    depends_on:
+      - rabbitmq

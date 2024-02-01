@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--- Font awesome--->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome/css/all.min.css') }}"/>
+
+    <script src="/static/js/facebook.js"></script>
+</head>
+<body>
+
+{% extends "layout.html" %}
+{% block content %}
+
+<!--load user data from the session -->
+<script type="text/javascript">
+    let userInfo = {{ user_info|tojson|safe }};
+</script>
+<!-- Greeting -->
+<h1 id="greeting">
+    Hallo, <span id="userFirstName">Name!</span>
+</h1>
+
+
+<!-- Info Box -->
+<div class="info-box border-0">
+    <p>Wir alle verbringen täglich mehrere Stunden im Internet, surfen durch soziale Medien, chatten mit Freunden,
+        shoppen oder informieren uns. Aber hast du dich schon einmal gefragt, welche deiner persönlichen Daten dabei
+        eigentlich gesammelt und wie sie geschützt werden?</p>
+
+    <p>Nicht immer ist klar, was hinter den Kulissen passiert. Deshalb ist es super wichtig, dass du dich mit dem
+        Datenschutz im Internet vertraut machst. So kannst du sicherstellen, dass deine Informationen geschützt bleiben
+        und du das Internet sorgenfrei genießen kannst.</p>
+
+    <p>Du hast dich mittels deines Facebook-Accounts bei uns angemeldet, aber weißt du eigentlich, was Facebook mit
+        deinen
+        Daten alles so darf?</p>
+
+    <ul>
+        <li>Facebook speichert deine Daten, auch wenn du kein Profil bei dem Dienst hast.</li>
+        <li>Deine Identität kann in Werbung verwendet werde, welche auch anderen Usern angezeigt wird.</li>
+        <li>Facebook kann deine privaten Nachrichten lesen.</li>
+        <li>Facebook kann deine Browserchronik lesen.</li>
+        <li>Von dir gelöschte Daten können weiterhin im Netz bleiben sollten diese von anderen Usern geteilt worden
+            sein.
+        </li>
+    </ul>
+
+    <p> Es is dementsprechend wichtig sich immer im klaren zu sein, welche Daten man öffentlich macht und vorsichtig mit
+        ihnen
+        umgehen. </p>
+
+    <p> Weitere Informationen zu Facebooks Umgang mit Daten findest du bei
+
+        <a href="https://tosdr.org/en/service/217">
+            <img src="https://shields.tosdr.org/en_182.svg"/>
+        </a></p>
+</div>
+
+<!-- Account and IP Information Boxes -->
+<div class="info-container">
+    <div class="card border-0 h-100">
+        <div class=" border-0">
+            <h2 class="card-titles">Account Information</h2>
+        </div>
+        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <div id="facebook-user-data"></div>
+        </div>
+    </div>
+
+    <div class="card border-0 h-100">
+        <div class="info-box border-0">
+            <img src="{{ url_for('static', filename='images/drawkit-grape-pack-illustration-8.svg') }}"
+                 alt="My Happy SVG" style="width: 400px; height: auto; align: center;"/>
+        </div>
+    </div>
+</div>
+
+<!-- Account and IP Information Boxes -->
+<div class="info-container">
+    <div class="card border-0 h-100">
+        <div class=" border-0">
+
+        </div>
+        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <img src="{{ url_for('static', filename='images/drawkit-grape-pack-illustration-7.svg') }}"
+                 alt="My Happy SVG" style="width: 400px; height: auto; align: center;"/>
+        </div>
+    </div>
+
+    <div class="card border-0 h-100">
+        <div class="border-0">
+            <h2 class="title-54">IP Information</h2>
+        </div>
+        <div class="info-box border-0">
+            <div id="userIP" class="userIP"></div>
+            <p>
+                Deine IP-Adresse ist im Grunde die Hausnummer deines Computers. Jede Website, die du besuchst, und jeder
+                Dienst, den du nutzt, kann über deine IP-Adresse im Prinzip sehen, woher deine Anfrage kommt.
+            </p>
+            <p>
+                Aber manchmal möchten wir nicht, dass jeder unsere digitale Spur sieht. Hier kommen VPNs ins Spiel –
+                Virtual Private Networks. Ein VPN versteckt deine echte IP-Adresse und verschlüsselt deine Daten.
+            </p>
+            <p> Man kann über die IP-Adresse beispielsweise auch leicht herausfinden wo die Nutzer:in des Computers
+                sich in der Welt befindet. Bist du zum Beispiel gerade in
+            <div id="ipInfo" class="userIP"></div>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<!-- Account and IP Information Boxes -->
+<div class="info-container">
+    <div class="card border-0 h-100">
+        <div class=" border-0">
+        </div>
+        <div class="info-box border-0">
+            <p>Nach deiner Anmeldung durchsuchen wir das Web, um relevante Informationen über dich zu sammeln. Bitte
+                warte einen
+                Moment, während wir die Suche durchführen.</p>
+
+            <p>Mit deinen Login-Daten suchen wir auf verschiedenen Plattformen nach deinem Nutzernamen. Wir finden
+                Beiträge und
+                Bilder, die mit dir in Verbindung stehen, und präsentieren dir eine übersichtliche Liste dieser
+                Inhalte. Es gilt: je weniger über dich zu finden ist, umso besser <i class="fa-regular fa-face-grin-wink"></i></p>
+
+            <div class="userInfo">
+                <p>Accounts auf verschiedenen Plattformen können ähnliche Namen oder Details aufweisen, ohne dass
+                    sie
+                    derselben Person zugeordnet sind. Unsere Analyse basiert auf Algorithmen, die Muster und
+                    Übereinstimmungen in den verfügbaren Daten suchen, aber keine endgültige Bestätigung der
+                    Account-Eigentümerschaft liefern können. </p>
+            </div>
+
+            <p>Unser Ziel ist es nicht nur, dir zu zeigen, was online über dich verfügbar ist, sondern auch, wie du
+                selbst
+                effektiv nach Informationen suchen kannst. So gewinnst du Kontrolle über deine digitale Präsenz und
+                sorgst für
+                mehr Sicherheit im Internet.</p>
+        </div>
+    </div>
+
+    <div class="card border-0 h-100">
+        <div class="border-0">
+        </div>
+        <div class="info-box border-0">
+            <img src="{{ url_for('static', filename='images/drawkit-grape-pack-illustration-13.svg') }}"
+                 alt="My Happy SVG" style="width: 400px; height: auto; align: center;"/>
+        </div>
+    </div>
+</div>
+
+<!-- Various Information -->
+<div class="category border-0">
+    <div class="accordion border-0" id="accordionExample">
+        <!-- Images Box -->
+        <div class="card">
+            <div class="card-header border-0" id="headingImages">
+                <h2 class="mb-0 border-0">
+                    <button class="btn btn-link collapsed button-52" type="button" data-toggle="collapse"
+                            data-target="#collapseImages" aria-expanded="false" aria-controls="collapseImages">
+                        Bilder
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseImages" class="collapse border-0" aria-labelledby="headingImages"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0">
+                    <script async src="https://cse.google.com/cse.js?cx=01aae76808fdd4e23">
+                    </script>
+                    <div class="gcse-searchresults-only" defaultToImageSearch="true"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Box -->
+        <div class="card">
+            <div class="card-header border-0" id="headingPrivacy">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-52" type="button" data-toggle="collapse"
+                            data-target="#collapsePrivacy" aria-expanded="false"
+                            aria-controls="collapsePrivacy">
+                        Privatsphäre
+                    </button>
+                </h2>
+            </div>
+            <div id="collapsePrivacy" class="collapse border-0" aria-labelledby="headingPrivacy"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0 info-box">
+
+                    <p>Hier sind ein paar Tipps wie du deine Daten bei der Verwendung von Facebook schützen kannst:
+                    </p>
+                    <ul>
+                        <li><b>Wer sieht was?:</b> Bei Facebook kannst Du ganz genau einstellen, wer Deine Beiträge und
+                            Dein Profil sieht. Nutze die Einstellungen, um Deine Privatsphäre zu schützen.
+                        </li>
+                        <li>
+                            <b>Freundschaftsanfragen:</b> Du entscheidest, wer Dir Freundschaftsanfragen senden kann. So
+                            vermeidest Du unerwünschte Kontakte.
+                        </li>
+                        <li>
+                            <b>Markierungen kontrollieren:</b> Du kannst einstellen, dass Du erst genehmigen musst, wenn
+                            jemand Dich in einem Beitrag markieren möchte.
+                        </li>
+                        <li>
+                            <b>Werbeanzeigen:</b>Facebook personalisiert Werbung basierend auf Deinen Daten. Du kannst
+                            jedoch steuern, welche Informationen verwendet werden.
+                        </li>
+                    </ul>
+
+                    <p>Wichtig ist es auch im Blick zu haben, dass auch andere Personen Posts und somit auch
+                        Informationen über dich veröffentlichen
+                        können. Die unten stehenden Links beinhalten Posts, welche bei der Suche zu deiner Person
+                        gefunden wurden. Wenn hier keine Ergebnisse stehen, umso besser! <i class="fa-regular fa-face-smile-wink"></i> </p>
+
+                    <div class="border-0" id="spinner3" style="text-align: center;"><i
+                            class="fas fa-spinner fa-spin fa-2xl"></i>
+                        <br>
+                        <p>Bitte schließe diese Seite nicht während nach Informationen gesucht wird!</p>
+
+                        <p>Sobald die Suche fertig ist erscheinen die Ergebnisse hier automatisch <i
+                                class="fa-regular fa-face-laugh-beam"></i></p></div>
+
+                    <div id="privacy" class="border-0"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Box -->
+        <div class="card">
+            <div class="card-header border-0" id="headingSocialMedia">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-52" type="button" data-toggle="collapse"
+                            data-target="#collapseSocialMedia" aria-expanded="false"
+                            aria-controls="collapseSocialMedia">
+                        Social Media
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseSocialMedia" class="collapse border-0" aria-labelledby="headingSocialMedia"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0">
+                     <div class="info-box border-0">
+                        <p>Die Profilnamen nach denen gesucht wird, werden auf zweierlei Arten definiert. Einerseits
+                            werden häufige Kombinationen aus deinem Vor- und Nachnamen erstellt. Weiters werden
+                            potenzielle Usernamen auch aus den online gefundenen Informationen extrahiert.
+                            Dementsprechend kann es sein, dass auch Profilnamen angezeigt werden, die nicht von dir
+                            sind.</p>
+                    </div>
+                    <div class="border-0" id="spinner" style="text-align: center;"><i
+                            class="fas fa-spinner fa-spin fa-2xl"></i>
+                        <br>
+                        <p>Bitte schließe diese Seite nicht während nach Informationen gesucht wird!</p>
+
+                        <p>Sobald die Suche fertig ist erscheinen die Ergebnisse hier automatisch <i
+                                class="fa-regular fa-face-laugh-beam"></i></p></div>
+                    <div id="twitter-links" class="info-box border-0"></div>
+                    <div id="facebook-links" class="info-box border-0"></div>
+                    <div id="reddit-links" class="info-box border-0"></div>
+                    <div id="instagram-links" class="info-box border-0"></div>
+                    <div id="linkedin-links" class="info-box border-0"></div>
+                    <div id="tiktok-links" class="info-box border-0"></div>
+                    <div id="possible-accounts" class="info-box border-0"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Results -->
+        <div class="card">
+            <div class="card-header border-0" id="headingMore">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-52" type="button" data-toggle="collapse"
+                            data-target="#collapseMore" aria-expanded="false" aria-controls="collapseMore">
+                        Weitere Ergebnisse
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseMore" class="collapse border-0" aria-labelledby="headingMore"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0">
+                    <div class="info-box border-0">
+                        <p>Hier werden weitere Resultate angezeigt die sich nicht rein mit sozialen Medien befassen.
+                        Hier können allerdings Informationen zu finden sein, die deine Schule, Universität oder deinen
+                        Arbeitsplatz identifizieren könnten.</p>
+                    </div>
+
+                    <div class="border-0" id="spinner2" style="text-align: center;"><i
+                            class="fas fa-spinner fa-spin fa-2xl"></i>
+                        <br>
+                        <p>Bitte schließe diese Seite nicht während nach Informationen gesucht wird!</p>
+
+                        <p>Sobald die Suche fertig ist erscheinen die Ergebnisse hier automatisch <i
+                                class="fa-regular fa-face-laugh-beam"></i></p></div>
+                    <div id="other-links" class="border-0"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Dorks Information -->
+        <div class="card">
+            <div class="card-header border-0" id="headingDorks">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-52" type="button" data-toggle="collapse"
+                            data-target="#collapseDorks" aria-expanded="false" aria-controls="collapseDorks">
+                        Google Dorks
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseDorks" class="collapse border-0" aria-labelledby="headingDorks"
+                 data-parent="#accordionExample">
+                <div class="info-box border-0">
+                    <div class="border-0" id="Google-Dorks-Guide"></div>
+                    <p>
+                        Es gibt zahlreiche Tools und Techniken, die uns
+                        helfen, Informationen effektiv zu finden. Eine solche Technik sind "Google Dorks".
+
+                        <br>Google Dorks basieren auf der Nutzung von speziellen Suchoperatoren, die Ihnen erlauben,
+                        die
+                        Suchergebnisse einzugrenzen oder spezifischere Informationen zu finden. Diese Technik kann
+                        für eine Vielzahl von Aufgaben eingesetzt werden, von der akademischen Forschung bis hin zur
+                        Marktanalyse.
+
+                        <br>Auch wir können sie dazu verwenden, um potenziell sensible Informationen im Internet zu
+                        finden.
+
+                        <br>Um ein Google Dork zu verwenden, gibt man einfach einen spezifischen Suchoperator
+                        zusammen mit Ihren Suchbegriffen in die Google-Suchleiste ein.
+
+                        <br>Beispielsweise kann man überprüfen, ob der eigene Name innerhalb eines PDFs aufscheint:
+                    </p>
+
+                    <!-- Area to display the generated link -->
+                    <div class="border-0" id="generatedLink1"></div>
+
+                    <p><br>Das funktioniert auch, wenn man verschiedene Dokumentformate suchen möchte. Mittels
+                        Operatoren wie "OR" kann man komplexere Dorks
+                        generieren:</p>
+
+                    <div class="border-0" id="generatedLink2"></div>
+
+                    <p><br>Dieser Dork sucht nicht nur nach PDFs, sondern auch nach Word-Dokumenten.
+
+                        <br> Solltest du der Meinung sein, man könnte Informationen über dich auf einer spezifischen
+                        Website finden, beispielsweise auf ResearchGate.
+                        damm kannst du mittels eines Dorks direkt nach deinem Namen suchen:
+                    </p>
+
+                    <div class="border-0" id="generatedLink3"></div>
+
+                    <p><br>Das funktioniert analog mit jeder anderen Website, sei es LinkedIn, Instagram oder auch
+                        die Website deiner Schule, Universität oder Arbeitsplatzes.
+
+                        <br>Vielleicht ist dir auch aufgefallen, dass wir beim letzten Dork den Namen nicht in
+                        Anführungszeichen gesetzt haben. Das liegt daran,
+                        dass diese auch ganz gezielt verwendet werden können.
+
+                        <br>Setzt man nämlich eine Phrase unter Anführungszeichen, wird dieser Ausdruck exakt und
+                        auch in der vorgegebenen Reihenfolge
+                        gesucht. Man kann so auch Wörter ausschließen, indem man einfach ein Minuszeichen vor der
+                        Phrase hinzufügt:
+
+                        <br>"Bildverarbeitung" -"Photoshop"
+
+                        <br> Dies schließt das Wort "Photoshop" aus der Suche aus.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(){
+            let userInfo = {{ user_info|tojson|safe }};
+            createTitle(userInfo);
+            getUserIP(userInfo);
+            displayFacebookUserData(userInfo);
+            google_dorks(userInfo);
+            fetchAllLinks();
+        });
+    </script>
+    {% endblock %}
+
+</div>
+</body>
+</html>

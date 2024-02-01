@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+   
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="/static/js/google.js"></script>
+</head>
+<body>
+
+{% extends "layout.html" %}
+{% block content %}
+
+<!--load user data from the session -->
+<script type="text/javascript">
+    let userInfo = {{ user_info|tojson|safe }};
+    createTitle(userInfo);
+    createSearchLinks(userInfo);
+    getUserIP(userInfo);
+    displayGoogleUserData(userInfo);
+    query_TOSDR();
+    google_dorks(userInfo);
+</script>
+<!-- Greeting -->
+<h1 id="greeting">
+    Hallo, <span id="userFirstName">Name!</span>
+</h1>
+
+
+<!-- Info Box -->
+<div class="info-box border-0">
+    <p>Wir alle verbringen täglich mehrere Stunden im Internet, surfen durch soziale Medien, chatten mit Freunden,
+        shoppen oder informieren uns. Aber hast du dich schon einmal gefragt, welche deiner persönlichen Daten dabei
+        eigentlich gesammelt und wie sie geschützt werden?</p>
+
+    <p>Nicht immer ist klar, was hinter den Kulissen passiert. Deshalb ist es super wichtig, dass du dich mit dem
+        Datenschutz im Internet vertraut machst. So kannst du sicherstellen, dass deine Informationen geschützt bleiben
+        und du das Internet sorgenfrei genießen kannst.</p>
+
+    <p>Du hast dich mittels deines Google-Accounts bei uns angemeldet, aber weißt du eigentlich, was Google mit deinen
+        Daten alles so darf?</p>
+
+    <ul>
+        <li>Google speichert deine Daten selbst wenn du nicht mit dem Service interagierst.</li>
+        <li>Deine Identität kann in Werbung verwendet und anderen Usern angezeigt werden.</li>
+        <li>Google hat Zugriff auf deine privaten E-Mails.</li>
+        <li>Google hat Zugriff auf deine Chronik.</li>
+        <li>Von dir gelöschte Inhalte sind weiterhin gespeichert.</li>
+    </ul>
+
+    <p> Es is dementsprechend wichtig sich immer im klaren zu sein, welche Daten man öffentlich macht und vorsichtig mit
+        ihnen
+        umgehen. </p>
+
+    <p> Weitere Informationen zu Googles Umgang mit Daten findest du bei
+
+        <a href="https://tosdr.org/en/service/217">
+            <img src="https://shields.tosdr.org/en_217.svg"/>
+        </a></p>
+</div>
+
+<!-- Account and IP Information Boxes -->
+<div class="info-container">
+    <div class="card border-0 h-100">
+        <div class=" border-0">
+            <h2 class="title-54 ">Account Information</h2>
+        </div>
+        <div class="card-body text-center p-4 p-lg-5 pt-0 pt-lg-0">
+            <div id="google-user-data"></div>
+        </div>
+    </div>
+
+    <div class="card border-0 h-100">
+        <div class="border-0">
+            <h2 class="title-54">IP Information</h2>
+        </div>
+        <div class="info-box border-0">
+            <div id="userIP" class="userIP"></div>
+            <p>
+                Deine IP-Adresse ist im Grunde die Hausnummer deines Computers. Jede Website, die du besuchst, und jeder
+                Dienst, den du nutzt, kann über deine IP-Adresse im Prinzip sehen, woher deine Anfrage kommt.
+            </p>
+            <p>
+                Aber manchmal möchten wir nicht, dass jeder unsere digitale Spur sieht. Hier kommen VPNs ins Spiel –
+                Virtual Private Networks. Ein VPN versteckt deine echte IP-Adresse und verschlüsselt deine Daten.
+            </p>
+            <p> Man kann über die IP-Adresse beispielsweise auch leicht herausfinden wo die Nutzer:in des Computers
+                sich in der Welt befindet. Bist du zum Beispiel gerade in
+            <div id="userIPLocation"></div>
+            ? </p>
+        </div>
+    </div>
+</div>
+
+<!-- Info Box -->
+<div class="info-box border-0">
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+        diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+        takimata sanctus est Lorem ipsum dolor sit amet.</p>
+</div>
+
+<!-- Various Information -->
+<div class="category border-0">
+    <div class="accordion border-0" id="accordionExample">
+        <!-- Images Box -->
+        <div class="card">
+            <div class="card-header border-0" id="headingImages">
+                <h2 class="mb-0 border-0">
+                    <button class="btn btn-link collapsed button-54" type="button" data-toggle="collapse"
+                            data-target="#collapseImages" aria-expanded="false" aria-controls="collapseImages">
+                        Bilder
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseImages" class="collapse border-0" aria-labelledby="headingImages"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0">
+                    Hello mello
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Box -->
+        <div class="card">
+            <div class="card-header border-0" id="headingSocialMedia">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-54" type="button" data-toggle="collapse"
+                            data-target="#collapseSocialMedia" aria-expanded="false"
+                            aria-controls="collapseSocialMedia">
+                        Social Media
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseSocialMedia" class="collapse border-0" aria-labelledby="headingSocialMedia"
+                 data-parent="#accordionExample">
+                <div class="card-body border-0">
+                    <div id="twitter-links" hidden="hidden" class="border-0"></div>
+                    <div id="facebook-links" hidden="hidden" class="border-0"></div>
+                    <div id="reddit-links" hidden="hidden" class="border-0"></div>
+                    <div id="instagram-links" hidden="hidden" class="border-0"></div>
+                    <div id="linkedin-links" hidden="hidden" class="border-0"></div>
+                    <div id="possible-accounts" hidden="hidden" class="border-0"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Results -->
+        <div class="card">
+            <div class="card-header border-0" id="headingGoogle">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-54" type="button" data-toggle="collapse"
+                            data-target="#collapseGoogle" aria-expanded="false" aria-controls="collapseGoogle">
+                        Google Ergebnisse
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseGoogle" class="collapse border-0" aria-labelledby="headingGoogle" data-parent="#accordionExample">
+                <div id="other-links" class="card-body border-0">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Dorks Information -->
+        <div class="card">
+            <div class="card-header border-0" id="headingDorks">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed button-54" type="button" data-toggle="collapse"
+                            data-target="#collapseDorks" aria-expanded="false" aria-controls="collapseDorks">
+                        Google Dorks
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseDorks" class="collapse" aria-labelledby="headingDorks" data-parent="#accordionExample">
+                <div class="info-box">
+                    <div id="Google-Dorks-Guide"></div>
+                    <p>
+                        Es gibt zahlreiche Tools und Techniken, die uns
+                        helfen, Informationen effektiv zu finden. Eine solche Technik sind "Google Dorks".
+
+                        <br>Google Dorks basieren auf der Nutzung von speziellen Suchoperatoren, die Ihnen erlauben,
+                        die
+                        Suchergebnisse einzugrenzen oder spezifischere Informationen zu finden. Diese Technik kann
+                        für eine Vielzahl von Aufgaben eingesetzt werden, von der akademischen Forschung bis hin zur
+                        Marktanalyse.
+
+                        <br>Auch wir können sie dazu verwenden, um potenziell sensible Informationen im Internet zu
+                        finden.
+
+                        <br>Um ein Google Dork zu verwenden, gibt man einfach einen spezifischen Suchoperator
+                        zusammen mit Ihren Suchbegriffen in die Google-Suchleiste ein.
+
+                        <br>Beispielsweise kann man überprüfen, ob der eigene Name innerhalb eines PDFs aufscheint:
+                    </p>
+
+                    <!-- Area to display the generated link -->
+                    <div id="generatedLink1"></div>
+
+                    <p><br>Das funktioniert auch, wenn man verschiedene Dokumentformate suchen möchte. Mittels
+                        Operatoren wie "OR" kann man komplexere Dorks
+                        generieren:</p>
+
+                    <div id="generatedLink2"></div>
+
+                    <p><br>Dieser Dork sucht nicht nur nach PDFs, sondern auch nach Word-Dokumenten.
+
+                        <br> Solltest du der Meinung sein, man könnte Informationen über dich auf einer spezifischen
+                        Website finden, beispielsweise auf ResearchGate.
+                        damm kannst du mittels eines Dorks direkt nach deinem Namen suchen:
+                    </p>
+
+                    <div id="generatedLink3"></div>
+
+                    <p><br>Das funktioniert analog mit jeder anderen Website, sei es LinkedIn, Instagram oder auch
+                        die Website deiner Schule, Universität oder Arbeitsplatzes.
+
+                        <br>Vielleicht ist dir auch aufgefallen, dass wir beim letzten Dork den Namen nicht in
+                        Anführungszeichen gesetzt haben. Das liegt daran,
+                        dass diese auch ganz gezielt verwendet werden können.
+
+                        <br>Setzt man nämlich eine Phrase unter Anführungszeichen, wird dieser Ausdruck exakt und
+                        auch in der vorgegebenen Reihenfolge
+                        gesucht. Man kann so auch Wörter ausschließen, indem man einfach ein Minuszeichen vor der
+                        Phrase hinzufügt:
+
+                        <br>"Bildverarbeitung" -"Photoshop"
+
+                        <br> Dies schließt das Wort "Photoshop" aus der Suche aus.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(){
+            let userInfo = {{ user_info|tojson|safe }};
+            createTitle(userInfo);
+            displayGoogleUserData(userInfo);
+            getUserIP(userInfo);
+            google_dorks(userInfo);
+            fetchFacebookLinks();
+            fetchInstagramLinks();
+            fetchRedditLinks();
+            fetchLinkedInLinks();
+            fetchTwitterLinks();
+            fetchOtherLinks();
+            fetchPossibleAccounts();
+        });
+    </script>
+    {% endblock %}
+
+
+</body>
+</html>

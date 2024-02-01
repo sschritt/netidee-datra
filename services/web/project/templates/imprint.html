@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Impressum</title>
+</head>
+<body>
+{% extends "layout.html" %}
+{% block content %}
+<div class="imprint">
+
+    <h2 style="margin-top: 50px;">Impressum</h2>
+    <p style="margin-top: 20px;">
+        <b>Medieninhaber, Herausgeber und Redaktion:</b><br><br>
+      
+        Forschungsgruppe Security & Privacy<br>
+        Fakultät für Informatik<br>
+        Universität Wien<br>
+        Kolingasse 14-16, 5. OG<br>
+        1090 Wien<br>
+        Telefon: +43 1 4277 79702<br>
+        sec@cs.univie.ac.at<br>
+        
+    </p>
+</div>
+
+{% endblock %}
+</body>
+</html>
